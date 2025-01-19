@@ -30,7 +30,7 @@
 import { inject, computed } from 'vue'
 import type { CollapseItemProps } from './types'
 import { collapseContextKey } from './types'
-// import Icon from '../Icon/Icon.vue'
+import Icon from '../Icon/Icon.vue'
 defineOptions({
   name: 'DtmCollapseItem',
 })

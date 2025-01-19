@@ -1,5 +1,8 @@
 <template>
   <div>
+    <icon :icon="['fas', 'heart']" />
+    <Icon icon="arrow-up" :size="size" type="danger" color="#ff0000" />
+    <br />
     <Button type="primary" size="large" plain>ceshi</Button>
     <Button ref="buttonRef" @click="open">Test Button</Button>
     <Button plain @click="close">Plain Button</Button>
@@ -45,7 +48,7 @@ import { ref, onMounted, h } from 'vue'
 import Button from './components/Button/Button.vue'
 import Collapse from './components/Collapse/Collapse.vue'
 import Item from './components/Collapse/CollapseItem.vue'
-// import Icon from './components/Icon/Icon.vue'
+import Icon from './components/Icon/Icon.vue'
 // import { createMessage } from './components/Message/method'
 import type { ButtonInstance } from './components/Button/types'
 // import type { TooltipInstance } from './components/Tooltip/types'
@@ -64,6 +67,11 @@ const open = () => {
   // createMessage({ message: 'hello world', duration: 0, showClose: true })
   // tooltipRef.value?.show()
   console.log('button')
+}
+const close = () => {
+  // createMessage({ message: 'hello world', duration: 0, showClose: true })
+  // tooltipRef.value?.show()
+  console.log('button:close')
 }
 // const close = () => {
 //   tooltipRef.value?.hide()
