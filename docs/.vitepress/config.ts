@@ -32,23 +32,40 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' },
-      { text: 'Test', link: '/markdown-examples' },
+      { text: '董陶民', link: '/dtm/introduction' },
+      { text: '19855389515', link: '/dtm/introduction' },
+      { text: 'dongtaomin@qq.com', link: '/dtm/introduction' },
     ],
 
     sidebar: [
       {
-        text: 'Examples',
+        text: '联系作者',
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' },
-          { text: 'Test here', link: '/api-examples' },
+          { text: '董陶民', link: '/dtm/introduction' },
+          { text: '19855389515', link: '/dtm/introduction' },
+          { text: 'dongtaomin@qq.com', link: '/dtm/introduction' },
         ],
       },
       {
-        text: 'Basic',
+        text: 'Button组件',
         items: [{ text: 'Button', link: '/components/button' }],
+      },
+      {
+        text: 'Icon组件',
+        items: [{ text: 'Icon', link: '/components/icon' }],
+      },
+      {
+        text: 'Collapse组件',
+        items: [{ text: 'Collapse', link: '/components/icon' }],
+      },
+      {
+        text: 'Tooltip基础组件',
+        items: [{ text: 'Icon', link: '/components/icon' }],
+      },
+
+      {
+        text: 'Icon组件',
+        items: [{ text: 'Icon', link: '/components/icon' }],
       },
     ],
 
