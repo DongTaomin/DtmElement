@@ -1,38 +1,32 @@
 <template>
-  <div
-    class="vk-dropdown"
-  >
-  <Tooltip 
-    :trigger="trigger" 
-    :placement="placement"
-    :popper-options="popperOptions"
-    :open-delay="openDelay"
-    :close-delay="closeDelay"
-    :manual="manual"
-    @visible-change="visibleChange"
-    ref="tooltipRef"
-  >
-    <slot />
-    <template #content>
-      <ul class="vk-dropdown__menu">
-        <template v-for="item in menuOptions" :key="item.key">
-          <li     
-            v-if="item.divided"
-            role="separator"
-            class="divided-placeholder"
-          />
-          <li
-            class="vk-dropdown__item"
-            @click="itemClick(item)"
-            :class="{'is-disabled': item.disabled, 'is-divided': item.divided }"
-            :id="`dropdown-item-${item.key}`"
-          >
-            <RenderVnode :vNode="item.label"/>
-          </li>
-        </template>
-      </ul>
-    </template>
-  </Tooltip>
+  <div class="vk-dropdown">
+    <Tooltip
+      :trigger="trigger"
+      :placement="placement"
+      :popper-options="popperOptions"
+      :open-delay="openDelay"
+      :close-delay="closeDelay"
+      :manual="manual"
+      @visible-change="visibleChange"
+      ref="tooltipRef"
+    >
+      <slot />
+      <template #content>
+        <ul class="vk-dropdown__menu">
+          <template v-for="item in menuOptions" :key="item.key">
+            <li v-if="item.divided" role="separator" class="divided-placeholder" />
+            <li
+              class="vk-dropdown__item"
+              @click="itemClick(item)"
+              :class="{ 'is-disabled': item.disabled, 'is-divided': item.divided }"
+              :id="`dropdown-item-${item.key}`"
+            >
+              <RenderVnode :vNode="item.label" />
+            </li>
+          </template>
+        </ul>
+      </template>
+    </Tooltip>
   </div>
 </template>
 <script setup lang="ts">
@@ -42,7 +36,7 @@ import Tooltip from '../Tooltip/Tooltip.vue'
 import RenderVnode from '../Common/RenderVnode'
 import type { TooltipInstance } from '../Tooltip/types'
 defineOptions({
-  name: 'VkDropdown'
+  name: 'DtmDropdown',
 })
 const props = withDefaults(defineProps<DropdownProps>(), { hideAfterClick: true })
 const emits = defineEmits<DropdownEmits>()
@@ -61,7 +55,6 @@ const itemClick = (e: MenuOption) => {
 }
 defineExpose<DropdownInstance>({
   show: () => tooltipRef.value?.show(),
-  hide: () => tooltipRef.value?.hide()
+  hide: () => tooltipRef.value?.hide(),
 })
 </script>
-

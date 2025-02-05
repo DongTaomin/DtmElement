@@ -1,8 +1,10 @@
+<template>
+  <DtmInput v-model="password" type="password" placeholder="请输入密码" show-password />
+</template>
+
 <script setup>
 import { ref } from 'vue'
-import Input from '@/components/Input/Input.vue'
-const test = ref('')
+import DtmInput from '@/components/Input/Input.vue'
+
+const password = ref('')
 </script>
-<template>
-  <Input v-model="test" placeholder="密码文本框，可以切换" showPassword/>
-</template>

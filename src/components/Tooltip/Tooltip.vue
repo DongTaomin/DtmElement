@@ -1,29 +1,17 @@
 <template>
-<div
-  class="vk-tooltip"
-  ref="popperContainerNode"
-  v-on="outerEvents"
->
-  <div
-    class="vk-tooltip__trigger"
-    ref="triggerNode"
-    v-on="events"
-  >
-    <slot />
-  </div>
-  <Transition :name="transition">
-    <div
-      v-if="isOpen"
-      class="vk-tooltip__popper"
-      ref="popperNode"
-    >
-      <slot name="content">
-        {{content}}
-      </slot>
-      <div id="arrow" data-popper-arrow></div>
+  <div class="vk-tooltip" ref="popperContainerNode" v-on="outerEvents">
+    <div class="vk-tooltip__trigger" ref="triggerNode" v-on="events">
+      <slot />
     </div>
-  </Transition>
-</div>
+    <Transition :name="transition">
+      <div v-if="isOpen" class="vk-tooltip__popper" ref="popperNode">
+        <slot name="content">
+          {{ content }}
+        </slot>
+        <div id="arrow" data-popper-arrow></div>
+      </div>
+    </Transition>
+  </div>
 </template>
 <script setup lang="ts">
 import { ref, watch, reactive, onUnmounted, computed } from 'vue'
@@ -33,7 +21,7 @@ import { debounce } from 'lodash-es'
 import type { TooltipProps, TooltipEmits, TooltipInstance } from './types'
 import useClickOutside from '../../hooks/useClickOutside'
 defineOptions({
-  name: 'VkTooltip'
+  name: 'DtmTooltip',
 })
 const props = withDefaults(defineProps<TooltipProps>(), {
   placement: 'bottom',
@@ -61,9 +49,9 @@ const popperOptions = computed(() => {
         options: {
           offset: [0, 9],
         },
-      }
+      },
     ],
-    ...props.popperOptions
+    ...props.popperOptions,
   }
 })
 
@@ -72,7 +60,6 @@ const open = () => {
   console.log('open times', openTimes)
   isOpen.value = true
   emits('visible-change', true)
-
 }
 const close = () => {
   closeTimes++
@@ -118,37 +105,47 @@ const attachEvents = () => {
 if (!props.manual) {
   attachEvents()
 }
-watch(() => props.manual, (isManual) => {
-  if (isManual) {
-    events = {}
-    outerEvents = {}    
-  } else {
-    attachEvents()
-  }
-})
-watch(() => props.trigger, (newTrigger, oldTrigger) => {
-  if (newTrigger !== oldTrigger) {
-    // clear the events
-    events = {}
-    outerEvents = {}
-    attachEvents()
-  }
-})
-watch(isOpen, (newValue) => {
-  if (newValue) {
-    if (triggerNode.value && popperNode.value) {
-      popperInstance = createPopper(triggerNode.value, popperNode.value, popperOptions.value)
+watch(
+  () => props.manual,
+  (isManual) => {
+    if (isManual) {
+      events = {}
+      outerEvents = {}
     } else {
-      popperInstance?.destroy()
+      attachEvents()
     }
-  }
-}, { flush: 'post'})
+  },
+)
+watch(
+  () => props.trigger,
+  (newTrigger, oldTrigger) => {
+    if (newTrigger !== oldTrigger) {
+      // clear the events
+      events = {}
+      outerEvents = {}
+      attachEvents()
+    }
+  },
+)
+watch(
+  isOpen,
+  (newValue) => {
+    if (newValue) {
+      if (triggerNode.value && popperNode.value) {
+        popperInstance = createPopper(triggerNode.value, popperNode.value, popperOptions.value)
+      } else {
+        popperInstance?.destroy()
+      }
+    }
+  },
+  { flush: 'post' },
+)
 
 onUnmounted(() => {
   popperInstance?.destroy()
 })
 defineExpose<TooltipInstance>({
-  'show': openFinal,
-  'hide': closeFinal
+  show: openFinal,
+  hide: closeFinal,
 })
 </script>

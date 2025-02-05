@@ -56,7 +56,7 @@ export default defineConfig({
       },
       {
         text: 'Collapse组件',
-        items: [{ text: 'Collapse', link: '/components/icon' }],
+        items: [{ text: 'Collapse', link: '/components/collapse' }],
       },
       {
         text: 'Tooltip基础组件',
@@ -64,8 +64,18 @@ export default defineConfig({
       },
 
       {
-        text: 'Icon组件',
-        items: [{ text: 'Icon', link: '/components/icon' }],
+        text: 'Dropdown组件',
+        items: [{ text: 'Dropdown', link: '/components/dropdown' }],
+      },
+
+      {
+        text: 'Input组件',
+        items: [{ text: 'Input', link: '/components/input' }],
+      },
+
+      {
+        text: 'Switch组件',
+        items: [{ text: 'Switch', link: '/components/switch' }],
       },
     ],
 
