@@ -1,32 +1,31 @@
 <template>
-<div
-  class="vk-switch"
-  :class="{
-    [`vk-switch--${size}`]: size,
-    'is-disabled': disabled,
-    'is-checked': checked
-  }"
-  @click="switchValue"
->
-  <input 
-    class="vk-swtich__input"
-    type="checkbox"
-    role="switch"
-    ref="input"
-    :name="name"
-    :disabled="disabled"
-    @keydown.enter="switchValue"
-  />
-  <div class="vk-switch__core">
-    <div class="vk-switch__core-inner">
-      <span v-if="activeText || inactiveText" class="vk-switch__core-inner-text">
-        {{checked ? activeText : inactiveText}}
-      </span>
-    </div>
-    <div class="vk-switch__core-action">
+  <div
+    class="vk-switch"
+    :class="{
+      [`vk-switch--${size}`]: size,
+      'is-disabled': disabled,
+      'is-checked': checked,
+    }"
+    @click="switchValue"
+  >
+    <input
+      class="vk-swtich__input"
+      type="checkbox"
+      role="switch"
+      ref="input"
+      :name="name"
+      :disabled="disabled"
+      @keydown.enter="switchValue"
+    />
+    <div class="vk-switch__core">
+      <div class="vk-switch__core-inner">
+        <span v-if="activeText || inactiveText" class="vk-switch__core-inner-text">
+          {{ checked ? activeText : inactiveText }}
+        </span>
+      </div>
+      <div class="vk-switch__core-action"></div>
     </div>
   </div>
-</div>
 </template>
 
 <script setup lang="ts">
@@ -34,12 +33,12 @@ import { ref, computed, onMounted, watch } from 'vue'
 import type { SwtichProps, SwtichEmits } from './types'
 
 defineOptions({
-  name: 'VkSwtich',
-  inheritAttrs: false
+  name: 'DtmSwtich',
+  inheritAttrs: false,
 })
 const props = withDefaults(defineProps<SwtichProps>(), {
   activeValue: true,
-  inactiveValue: false
+  inactiveValue: false,
 })
 const emits = defineEmits<SwtichEmits>()
 
@@ -58,9 +57,12 @@ onMounted(() => {
   input.value!.checked = checked.value
 })
 watch(checked, (val) => {
-  input.value!.checked = val 
+  input.value!.checked = val
 })
-watch(() => props.modelValue, (newValue) => {
-  innerValue.value = newValue
-})
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    innerValue.value = newValue
+  },
+)
 </script>

@@ -79,6 +79,6 @@ export default defineConfig({
       },
     ],
 
-    socialLinks: [{ icon: 'github', link: 'https://github.com/DongTaomin?tab=repositories' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/DongTaomin' }],
   },
 })
